@@ -5,11 +5,11 @@ It reads names from a text file(unsorted-names-list.txt), sorts them and writes 
 
 ***To Execute the Program ***
 
-Open a command prompt and navigate to the directory containing the compiled executable (name.sorter_1.exe).
+Open a command prompt and navigate to the directory containing the compiled executable (name-sorter_1.exe).
 
 Run the program by executing the following command:
 
-name.sorter_1 <file-path>
+name-sorter_1 <file-path>
 
 *** Unit Testing ****
 
