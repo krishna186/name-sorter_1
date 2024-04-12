@@ -9,46 +9,59 @@ namespace name_sorter_1
 {
     public class NameSorting
     {
+        private readonly INameFileReader _fileReader;
+        private readonly INameFileWriter _fileWriter;
+
+        public NameSorting()
+        {
+            _fileReader = new NameFileReader();
+            _fileWriter = new NameFileWriter();
+        }
+
         public static void Main(string[] args)
         {
             try
             {
-                
+
                 if (args.Length != 1)
                 {
                     Console.WriteLine("Please Enter the File Path");
                     return;
                 }
-                string filepath =  args[0].ToString();
-                List<string> Listinput = File.ReadAllLines(filepath).ToList();
+                string filepath = args[0].ToString();
+                var nameSorting = new NameSorting();
+                List<string> Listinput = nameSorting._fileReader.ReadNames(filepath);
+
                 if (Listinput.Count > 0)
                 {
-                    List<string> Listoutput = Listinput.OrderBy(x => x.Split(' ').Last()).ThenBy(x => SplitFirstName(x)).ToList();
-                    foreach (var item in Listoutput)
-                    {
-                        Console.WriteLine(item.ToString());
-                    }
-                    File.WriteAllLines("sorted-names-list.txt", Listoutput);
+                    nameSorting.SortNames(Listinput);
                 }
                 else
                 {
                     Console.WriteLine("No names found in the file");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message.ToString());
             }
 
         }
 
-        public static string SplitFirstName(string name)
+        public void SortNames(List<string> Listinput)
+        {
+            var nameSorting = new NameSorting();
+            List<string> Listoutput = Listinput.OrderBy(x => x.Split(' ').Last()).ThenBy(x => SplitFirstName(x)).ToList();
+            nameSorting._fileWriter.WriteNamesToFile(Listoutput);
+        }
+
+        public string SplitFirstName(string name)
         {
             string[] strsplit = name.Split(' ');
             StringBuilder str = new StringBuilder();
             for (int i = 0; i <= strsplit.Length - 1; i++)
             {
-                str.Append(strsplit[i].ToString() + " ");              
+                str.Append(strsplit[i].ToString() + " ");
             }
 
             return str.ToString();

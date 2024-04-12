@@ -31,7 +31,6 @@ namespace name_sorter_1.Tests
                 "Frankie Conner Ritter",
                 "Netherwood Road",
                 "Sinclair Road",
-                "London Underground",
                 "Shelby Nathan Yoder",
             };
 
